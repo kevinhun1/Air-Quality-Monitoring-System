@@ -11,3 +11,19 @@ pytest-cov
 # For running against Postgres in production/dev
 psycopg2-binary
 email-validator
+numpy
+scikit-learn
+
+fastapi
+uvicorn
+sqlalchemy
+python-jose[cryptography]
+passlib[bcrypt]
+python-dotenv
+pytest
+httpx
+pytest-cov
+
+# For running against Postgres in production/dev
+psycopg2-binary
+email-validator

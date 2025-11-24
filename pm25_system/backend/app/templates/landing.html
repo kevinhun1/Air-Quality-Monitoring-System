@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %}Welcome{% endblock %} {% block
+content %}
+<div class="hero">
+  <h1>Welcome to the PM2.5 Monitoring System</h1>
+  <p>
+    This service collects PM2.5 sensor readings, raises alerts, and provides a
+    simple dashboard.
+  </p>
+
+  <div class="hero-links">
+    <a class="btn" href="/ui/auth/login">Login</a>
+    <a class="btn" href="/ui/auth/register">Register</a>
+    <a class="btn" href="/ui/auth/invite/accept">Accept Invite</a>
+    <a class="btn" href="/ui/dashboard">View Dashboard</a>
+  </div>
+</div>
+
+<hr />
+
+<section>
+  <h2>Quick Start</h2>
+  <ol>
+    <li>Register or login.</li>
+    <li>
+      If you're an admin, create invites from the "Create Invite" link in the
+      header.
+    </li>
+    <li>Send sensor readings to the API at <code>/api/readings</code>.</li>
+  </ol>
+</section>
+
+{% endblock %}

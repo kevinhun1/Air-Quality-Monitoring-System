@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .card {
+        padding: 12px;
+        border: 1px solid #95e95d;
+        margin-bottom: 12px;
+        border-radius: 6px;
+    }
+</style>
+
+<h1>Dashboard</h1>
+
+<div class="card">
+    <strong>Period (hours):</strong> {{ summary.period_hours }}<br />
+    <strong>Total readings:</strong> {{ summary.total_readings }}<br />
+    <strong>Avg PM2.5:</strong> {{ summary.avg_pm25 or "N/A" }}<br />
+</div>
+
+<div class="card">
+    <canvas id="pmChart" width="800" height="300"></canvas>
+</div>
+
+<script>
+    // fetch chart buckets (client-side)
+    async function loadChart() {
+        const resp = await fetch('/dashboard/chart?hours=24&interval_minutes=60');
+        const json = await resp.json();
+        const labels = json.buckets.map(b => b.start);
+        const data = json.buckets.map(b => b.avg_pm25 ?? 0);
+        const ctx = document.getElementById('pmChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: { labels, datasets: [{ label: 'Avg PM2.5', data, borderColor: 'red', fill: false }] },
+            options: { scales: { x: { display: true }, y: { beginAtZero: true } } }
+        });
+    }
+    loadChart();
+</script>
+
+{% endblock %}
