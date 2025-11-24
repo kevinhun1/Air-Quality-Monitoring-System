@@ -11,3 +11,5 @@ pytest-cov
 # For running against Postgres in production/dev
 psycopg2-binary
 email-validator
+numpy
+scikit-learn

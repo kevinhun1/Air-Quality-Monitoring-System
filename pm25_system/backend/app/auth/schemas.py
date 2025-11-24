@@ -1,39 +1,27 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import EmailStr
 from typing import Optional
 from datetime import datetime
 
+from app.utils.pydantic_compat import OrmBase as BaseModel
 
 class Token(BaseModel):
     access_token: str
-    token_type: str
-
+    token_type: str = "bearer"
 
 class TokenData(BaseModel):
-    email: Optional[EmailStr] = None
+    user_id: Optional[int] = None
     role: Optional[str] = None
-
 
 class UserCreate(BaseModel):
     name: str
     email: EmailStr
     password: str
-    role: str
-
 
 class UserOut(BaseModel):
     id: int
     name: str
     email: EmailStr
     role: str
-    created_at: Optional[datetime]
-
-    class Config:
-        orm_mode = True
-
-
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
 
 
 class InviteCreate(BaseModel):
@@ -44,11 +32,8 @@ class InviteCreate(BaseModel):
 class InviteOut(BaseModel):
     email: EmailStr
     role: str
-    token: str
-    expires_at: Optional[datetime]
-
-    class Config:
-        orm_mode = True
+    token: Optional[str] = None
+    expires_at: Optional[datetime] = None
 
 
 class InviteAccept(BaseModel):

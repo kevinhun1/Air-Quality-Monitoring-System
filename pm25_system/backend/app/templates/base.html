@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}PM2.5 System{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Home</a> | <a href="/ui/dashboard">Dashboard</a> | {% if
+        current_user %} {% if current_user.role and current_user.role.lower() ==
+        'admin' %} <a href="/ui/auth/invite">Create Invite</a> | {% endif %}
+        <a href="/ui/auth/logout">Logout</a>
+        {% else %}
+        <a href="/ui/auth/login">Login</a> |
+        <a href="/ui/auth/register">Register</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+  </body>
+</html>
