@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title %}Create Invite{% endblock %} {% block
+content %}
+<h1>Create Invite</h1>
+{% if message %}
+<p style="color: green">{{ message }}</p>
+{% endif %} {% if token %}
+<p><strong>Invite token (copy/send to user):</strong></p>
+<pre>{{ token }}</pre>
+{% endif %}
+
+<form method="post" action="/ui/auth/invite">
+  <label for="email">Email</label><br />
+  <input id="email" name="email" type="email" required /><br />
+  <label for="role">Role</label><br />
+  <select id="role" name="role">
+    <option value="admin">admin</option>
+    <option value="health_worker">health_worker</option>
+    <option value="resident" selected>resident</option></select
+  ><br />
+  <button type="submit">Create Invite</button>
+</form>
+<p><a href="/ui/auth/login">Back to login</a></p>
+{% endblock %}
